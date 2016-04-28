@@ -8,17 +8,25 @@ from Operators import Operators
 class Planner(object):
 
     print "INSIDE PLANNER"
-    def __init__(self, planning_env,object_list):
+    def __init__(self,planning_env,robot,kinbody_env):
+        
         self.planning_env = planning_env
-        self.list = object_list
-        print "obj list" + str(object_list)
+        self.list = kinbody_env.obj_list
+        self.robot = robot
+        self.kinbody_env = kinbody_env
+        #print "obj list" + str(object_list)
 
     def Plan(self,object_list):
-    	
-        goal_loc= self.planning_env.target_tray.GetTransform()
+        goal_loc= self.kinbody_env.target_tray.GetTransform()
         print "goal:" + str(goal_loc)
+
+        start_loc_box = self.kinbody_env.bounding_box(self.list[1])
+        op = Operators(self.list[1], self.planning_env, self.robot,self.kinbody_env)
+        import IPython
+        IPython.embed()
+        op.Pick(self.list[1], start_loc_box)
         
-        while(self.list):
+        '''while(self.list):
             start_loc_box = self.planning_env.bounding_box(self.list[1])
             goal_loc_box = self.planning_env.bounding_box(self.planning_env.target_tray)
             
@@ -26,7 +34,7 @@ class Planner(object):
             op.Pick(self.list[1], start_loc_box)
             #op.Place(self.list[i], goal_loc)
 
-            '''if op.Pick(self.list[i], start_loc) == True:
+            if op.Pick(self.list[i], start_loc) == True:
                 op.Place(self.list[i],self.planning_env.target_tray)
                 del self.list[i]
             else: 
@@ -52,16 +60,3 @@ class Planner(object):
         '''
 
 print "End of planner"
-
-
-'''def main():
-    robotEnv = HerbEnv()
-    obj_list = robotEnv.obj_list
-    plan = Planner(robotEnv,obj_list)
-    plan.Plan(obj_list)
-    print "**************HERB***********************"
-    time.sleep(10000)
-
-if __name__ == '__main__':
-    main()   
-'''

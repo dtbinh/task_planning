@@ -1,27 +1,23 @@
 #!/usr/bin/env python
-import task_planning
 import herbpy
+import numpy as np
 from HerbEnv import HerbEnv
 from Planner import *
 
-
-#robot.PlanToNamedConfiguration(home, execute = True)
+#env, robot = herbpy.initialize(sim=True)
+#robot.PlanToNamedConfiguration('home', execute = True)
 
 def main():
-	#import IPython
-	#IPython.embed()
-	#env, robot = herbpy.initialize(sim=True)
-	planning_env = HerbEnv()
-	obj_list = planning_env.obj_list
+	env, robot = herbpy.initialize(sim=True)
 
-	plan = Planner(planning_env,obj_list)
-	plan.Plan(obj_list)
+	import IPython
+	IPython.embed()
+	kinbody_env = HerbEnv(env,robot)
+
+	plan = Planner(env,robot,kinbody_env)
+	plan.Plan(kinbody_env.obj_list)
 	time.sleep(10000)
-
-    #traj = robot.ConvertPlanToTrajectory(plan)
-    #robot.ExecuteTrajectory(traj)    
 
 if __name__ == "__main__":
 
-	main()   
-    
+	main()
