@@ -85,11 +85,9 @@ class Fluents(object):
 
 
     def Holding(self):
-#        import IPython
-#        IPython.embed()
         for b in self.env.GetBodies():
             if self.robot.IsGrabbing(b):
                 print "holding ", b.GetName()
                 return b
-            print "holding nothing"
-            return None
+        print "holding nothing"
+        return None
