@@ -21,8 +21,8 @@ class Operators(object):
         
         if (self.fluents.Holding()==None) and (self.fluents.In(object_id,object_loc)==True):# and (self.fluents.ClearX([object_id])==True):
             
-            import IPython
-            IPython.embed()
+#            import IPython
+#            IPython.embed()
 
             self.robot.Grasp(object_id,manip = self.robot.right_arm)
             #herbpy.action.Grasp(object_id)#, manip = self.robot.right_arm)

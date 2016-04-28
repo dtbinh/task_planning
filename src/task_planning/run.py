@@ -8,15 +8,14 @@ from Planner import *
 #robot.PlanToNamedConfiguration('home', execute = True)
 
 def main():
-	env, robot = herbpy.initialize(sim=True)
-
+	env, robot = herbpy.initialize(sim=True, attach_viewer='interactivemarker')
+	kinbody_env = HerbEnv(env,robot)
 	import IPython
 	IPython.embed()
-	kinbody_env = HerbEnv(env,robot)
 
 	plan = Planner(env,robot,kinbody_env)
 	plan.Plan(kinbody_env.obj_list)
-	time.sleep(10000)
+#	time.sleep(10000)
 
 if __name__ == "__main__":
 

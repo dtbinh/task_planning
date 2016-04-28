@@ -22,8 +22,6 @@ class Planner(object):
 
         start_loc_box = self.kinbody_env.bounding_box(self.list[1])
         op = Operators(self.list[1], self.planning_env, self.robot,self.kinbody_env)
-        import IPython
-        IPython.embed()
         op.Pick(self.list[1], start_loc_box)
         
         '''while(self.list):
