@@ -17,9 +17,10 @@ class HerbEnv(object):
         #import IPython
         #IPython.embed()
         # add a table
-        self.table = self.env.ReadKinBodyXMLFile('models/data/furniture/table.kinbody.xml')
+#        self.table = self.env.ReadKinBodyXMLFile('models/data/furniture/table.kinbody.xml')
+        self.table = self.env.ReadKinBodyXMLFile('furniture/table.kinbody.xml')
         self.env.Add(self.table)
-        table_pose = np.array([[ 0, 0, -1, 0.6], 
+        table_pose = np.array([[ 0, 0, -1, 0.8], 
                                   [-1, 0,  0, 0], 
                                   [ 0, 1,  0, 0], 
                                   [ 0, 0,  0, 1]])
@@ -27,7 +28,8 @@ class HerbEnv(object):
 
         #add kinbodies
         #glass 1
-        self.target_kinbody1 = self.env.ReadKinBodyURI('models/data/objects/glass.kinbody.xml')
+#        self.target_kinbody1 = self.env.ReadKinBodyURI('models/data/objects/glass.kinbody.xml')
+        self.target_kinbody1 = self.env.ReadKinBodyXMLFile('objects/plastic_glass.kinbody.xml')
         self.target_kinbody1.SetName("glass1")
         self.robot.GetEnv().Add(self.target_kinbody1)
         glass_pose = np.array([[ 0, 0, 0, 0.7], 
@@ -37,7 +39,7 @@ class HerbEnv(object):
         self.target_kinbody1.SetTransform(glass_pose)
 
         #glass 2
-        self.target_kinbody2 = self.env.ReadKinBodyURI('models/data/objects/glass.kinbody.xml')
+        self.target_kinbody2 = self.env.ReadKinBodyURI('objects/plastic_glass.kinbody.xml')
         self.target_kinbody2.SetName("glass2")
         self.robot.GetEnv().Add(self.target_kinbody2)
         glass_pose = np.array([[ 0, 0, 0, 0.5], 
@@ -47,7 +49,7 @@ class HerbEnv(object):
         self.target_kinbody2.SetTransform(glass_pose)
 
         #glass 3
-        self.target_kinbody3 = self.env.ReadKinBodyURI('models/data/objects/glass.kinbody.xml')
+        self.target_kinbody3 = self.env.ReadKinBodyURI('objects/plastic_glass.kinbody.xml')
         self.target_kinbody2.SetName("glass3")
         self.robot.GetEnv().Add(self.target_kinbody3)
         glass_pose = np.array([[ 0, 0, 0, 0.7], 
@@ -57,7 +59,7 @@ class HerbEnv(object):
         self.target_kinbody3.SetTransform(glass_pose)
 
         #add tray
-        self.target_tray = self.env.ReadKinBodyURI('models/data/objects/wicker_tray.kinbody.xml')
+        self.target_tray = self.env.ReadKinBodyURI('objects/wicker_tray.kinbody.xml')
         self.robot.GetEnv().Add(self.target_tray)
         tray_pose = np.array([[ 0, 1, 0, 0.6], 
                                   [1, 0,  0, 0.5], 
