@@ -30,8 +30,8 @@ class HerbEnv(object):
         self.target_kinbody1 = self.env.ReadKinBodyURI('models/data/objects/plastic_glass.kinbody.xml')
         self.target_kinbody1.SetName("glass1")
         self.env.Add(self.target_kinbody1)
-        glass_pose = np.array([[ 0, 0, 0, 1.0], 
-                              [-1, 0,  1, -0.5], 
+        glass_pose = np.array([[ 0, 0, 0, 0.5],
+                              [-1, 0,  1, -0.5],
                               [ 0, 1,  0, 0.7165], 
                               [ 0, 0,  0, 1]])
         self.target_kinbody1.SetTransform(glass_pose)
@@ -41,7 +41,7 @@ class HerbEnv(object):
         self.target_kinbody2 = self.env.ReadKinBodyURI('models/data/objects/plastic_glass.kinbody.xml')
         self.target_kinbody2.SetName("glass2")
         self.env.Add(self.target_kinbody2)
-        glass_pose = np.array([[ 0, 0, 0, 0.8], 
+        glass_pose = np.array([[ 0, 0, 0, 0.5],
                                   [-1, 0,  1, -0.4], 
                                   [ 0, 1,  0, 0.7165], 
                                   [ 0, 0,  0, 1]])
@@ -52,8 +52,8 @@ class HerbEnv(object):
         self.target_kinbody3 = self.env.ReadKinBodyURI('models/data/objects/plastic_glass.kinbody.xml')
         self.target_kinbody3.SetName("glass3")
         self.env.Add(self.target_kinbody3)
-        glass_pose = np.array([[ 0, 0, 0, 1.0], 
-                                  [-1, 0,  1, -0.3], 
+        glass_pose = np.array([[ 0, 0, 0, 0.8],
+                                  [-1, 0,  1, -0.5],
                                   [ 0, 1,  0, 0.7165], 
                                   [ 0, 0,  0, 1]])
         self.target_kinbody3.SetTransform(glass_pose)

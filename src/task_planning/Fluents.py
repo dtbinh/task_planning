@@ -24,11 +24,10 @@ class Fluents(object):
         print objname.GetName() + " Object not in "
         return False
 
-    def Overlaps(self,objname):
+    def sum_dist(self,objname):
         obj_pos=[]
         sum_list=[]
         n_dims=[3,len(self.kinbody_env.obj_list)]
-
         dist_list=0
         for n in n_dims:
             dist_list = [dist_list] * n
@@ -36,32 +35,29 @@ class Fluents(object):
         for obj in self.kinbody_env.obj_list:
             obj_pos.append(obj.GetTransform()[:3,3])
         obj_pos=np.array(obj_pos)
-        #print "obj_pos"+str(obj_pos)
         for i,item_i in enumerate(obj_pos):
             for j,item_j in enumerate(obj_pos):
                 dist_list[i][j]=np.linalg.norm(item_j-item_i)
-            print dist_list    
-            sum_list.append(dist_list[i])
-        #print sum_list    
+            sum_list.append(sum(dist_list[i]))
         max_ind=sum_list.index(max(sum_list))
         if obj_ind==max_ind:
-           print "object not overlapped is ", objname.GetName()
-           return False
+           print "object farthest of all is ", objname.GetName()
+           return True
         else:
-            print "object overlapped is ", objname.GetName()
-            return True
+            print "object not farthest is ", objname.GetName()
+            return False
 
-
+    #min dist of object from end effector(ee)
     def min_dist(self,objname):
-        robot_pose=self.robot.GetTransform()[:3,3]
+        ee_pose=self.robot.right_arm.GetEndEffectorTransform()[:3,3]
         dist_list=[]
         obj_ind=self.kinbody_env.obj_list.index(objname)
         for obj in self.kinbody_env.obj_list:
             obj_pos=obj.GetTransform()[:3,3]
-            dist_list.append(np.linalg.norm(robot_pose-obj_pos))
+            dist_list.append(np.linalg.norm(ee_pose-obj_pos))
         min_ind=dist_list.index(min(dist_list))
         if obj_ind==min_ind:
-           print "object at min dist from robot is ", objname.GetName()
+           print "object at min dist from end effector is ", objname.GetName()
            return True
         else:
             print "object not at min dist is ", objname.GetName()
@@ -76,7 +72,7 @@ class Fluents(object):
             for obj in self.kinbody_env.obj_list:
                 if obj not in obj_list:
                     non_obj.append(obj)
-                    if self.Overlaps(obj)==True: #can be changed with min_dist()
+                    if self.sum_dist(obj)==False: #can be changed with min_dist()
                         check_non+=1
             if check_non==len(non_obj):
                 check_req+=1
@@ -87,6 +83,14 @@ class Fluents(object):
             print "not clear"
             return False
 
+    def IsReachable(self,objname):
+        IK_sol=self.robot.right_arm.FindIKSolutions(objname.GetTransform(),False)
+        if IK_sol.size is 0:
+            print "No IK Solution"
+            return False
+        else:
+            print "Found IK Solution"
+            return True
 
     def Holding(self):
         for b in self.env.GetBodies():

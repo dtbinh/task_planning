@@ -19,7 +19,7 @@ def main():
 
 	plan = Planner(env,robot,kinbody_env)
 	plan.Plan(kinbody_env.obj_list)
-#	time.sleep(10000)
+	time.sleep(1000)
 
 if __name__ == "__main__":
 	main()

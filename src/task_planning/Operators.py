@@ -17,17 +17,18 @@ class Operators(object):
 
     def Pick(self,object_id,object_loc):
         
-        if (self.fluents.Holding()==None) and (self.fluents.In(object_id,object_loc)==True):#and (self.fluents.ClearX([object_id])==True):
-            check=0
-            for obj in self.kinbody_env.obj_list:
-                if obj is not object_id:
-                    if not self.env.CheckCollision(self.robot,obj):
-                        check+=1
+        if (self.fluents.Holding()==None) and (self.fluents.In(object_id,object_loc)==True) and (self.fluents.IsReachable(object_id)==True) and (self.fluents.ClearX([object_id])==True):
+            #check=0
+            #for obj in self.kinbody_env.obj_list:
+             #   if obj is not object_id:
+             #       if not self.env.CheckCollision(self.robot,obj):
+              #          check+=1
 
             #from prpy.rave import Disabled
             #if check==len(self.kinbody_env.obj_list)-1:
-            import IPython
-            IPython.embed()
+            #import IPython
+            #IPython.embed()
+        #if (self.fluents.min_dist(object_id)):
             self.robot.Grasp(object_id,manip = self.robot.right_arm)
         
             print str(object_id) + " has been picked"
