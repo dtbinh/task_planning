@@ -28,6 +28,7 @@ class Fluents(object):
         obj_pos=[]
         sum_list=[]
         n_dims=[3,len(self.kinbody_env.obj_list)]
+
         dist_list=0
         for n in n_dims:
             dist_list = [dist_list] * n
@@ -35,10 +36,13 @@ class Fluents(object):
         for obj in self.kinbody_env.obj_list:
             obj_pos.append(obj.GetTransform()[:3,3])
         obj_pos=np.array(obj_pos)
+        #print "obj_pos"+str(obj_pos)
         for i,item_i in enumerate(obj_pos):
             for j,item_j in enumerate(obj_pos):
                 dist_list[i][j]=np.linalg.norm(item_j-item_i)
+            print dist_list    
             sum_list.append(dist_list[i])
+        #print sum_list    
         max_ind=sum_list.index(max(sum_list))
         if obj_ind==max_ind:
            print "object not overlapped is ", objname.GetName()

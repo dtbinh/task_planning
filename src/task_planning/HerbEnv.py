@@ -31,9 +31,9 @@ class HerbEnv(object):
         self.target_kinbody1.SetName("glass1")
         self.env.Add(self.target_kinbody1)
         glass_pose = np.array([[ 0, 0, 0, 1.0], 
-                                  [-1, 0,  1, -0.5], 
-                                  [ 0, 1,  0, 0.7165], 
-                                  [ 0, 0,  0, 1]])
+                              [-1, 0,  1, -0.5], 
+                              [ 0, 1,  0, 0.7165], 
+                              [ 0, 0,  0, 1]])
         self.target_kinbody1.SetTransform(glass_pose)
         self.place_on(self.target_kinbody1, self.table)
 
@@ -50,7 +50,7 @@ class HerbEnv(object):
 
         #glass 3
         self.target_kinbody3 = self.env.ReadKinBodyURI('models/data/objects/plastic_glass.kinbody.xml')
-        self.target_kinbody2.SetName("glass3")
+        self.target_kinbody3.SetName("glass3")
         self.env.Add(self.target_kinbody3)
         glass_pose = np.array([[ 0, 0, 0, 1.0], 
                                   [-1, 0,  1, -0.3], 
@@ -60,7 +60,6 @@ class HerbEnv(object):
         self.place_on(self.target_kinbody3, self.table)
 
         #add tray
-
         self.target_tray = self.env.ReadKinBodyURI('models/data/objects/wicker_tray.kinbody.xml')
         self.env.Add(self.target_tray)
         tray_pose = np.array([[ 0, 1, 0, 0.9], 
