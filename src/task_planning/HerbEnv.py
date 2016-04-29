@@ -10,7 +10,24 @@ class HerbEnv(object):
     def __init__(self,env,robot):
         self.env = env
         self.robot = robot
-        self.openrave_init()
+
+        if sim:
+            self.openrave_init()
+        else:
+            self.perception_init()
+        
+    def perception_init(self):
+
+        robot.DetectObjects()
+        glasses = [b for b in env.GetBodies() if 'glass' in b.GetName()]
+        self.table = [b for b in env.GetBodies() if 'table' in b.GetName()][0]
+        self.target_tray = [b for b in env.GetBodies() if 'tray' in b.GetName()][0]
+
+        for g in glasses:
+            place_on(g, self.table)
+        place_on(self.target_tray, self.table)
+
+        self.obj_list=glasses
         
     def openrave_init(self):
 
