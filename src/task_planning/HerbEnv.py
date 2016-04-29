@@ -7,25 +7,27 @@ print "INSIDE HERBENV"
 
 class HerbEnv(object):
 
-    def __init__(self,env,robot):
+    def __init__(self,env,robot,sim):
         self.env = env
         self.robot = robot
 
-        if sim:
+	if sim:
             self.openrave_init()
         else:
             self.perception_init()
-        
+	       
     def perception_init(self):
 
-        robot.DetectObjects()
-        glasses = [b for b in env.GetBodies() if 'glass' in b.GetName()]
-        self.table = [b for b in env.GetBodies() if 'table' in b.GetName()][0]
-        self.target_tray = [b for b in env.GetBodies() if 'tray' in b.GetName()][0]
-
+        self.robot.DetectObjects()
+        glasses = [b for b in self.env.GetBodies() if 'glass' in b.GetName()]
+        self.table = [b for b in self.env.GetBodies() if 'table' in b.GetName()][0]
+        self.target_tray = [b for b in self.env.GetBodies() if 'tray' in b.GetName()][0]
+        table_pos=self.table.GetTransform()
+	table_pos[2,3]+=0.04
+	self.table.SetTransform(table_pos)
         for g in glasses:
-            place_on(g, self.table)
-        place_on(self.target_tray, self.table)
+            self.place_on(g, self.table)
+        self.place_on(self.target_tray, self.table)
 
         self.obj_list=glasses
         
