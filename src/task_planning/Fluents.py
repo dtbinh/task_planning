@@ -63,6 +63,13 @@ class Fluents(object):
             print "object not at min dist is ", objname.GetName()
             return False
 
+    def final_metric(self,objname):
+        num_obj=len(self.kinbody_env.obj_list)
+        if num_obj>2:
+            return self.sum_dist(objname)
+        else:
+            return self.min_dist(objname)
+
 
     def ClearX(self,obj_list):
         check_non=0
@@ -72,7 +79,7 @@ class Fluents(object):
             for obj in self.kinbody_env.obj_list:
                 if obj not in obj_list:
                     non_obj.append(obj)
-                    if self.sum_dist(obj)==False: #can be changed with min_dist()
+                    if self.final_metric(obj)==False: #can be changed with min_dist()
                         check_non+=1
             if check_non==len(non_obj):
                 check_req+=1

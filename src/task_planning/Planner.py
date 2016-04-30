@@ -46,7 +46,7 @@ class Planner(object):
         #IPython.embed()
         start_loc_box = self.kinbody_env.bounding_box(self.kinbody_env.table)
         start_loc_box[4] = (start_loc_box[1]+start_loc_box[4])/2
-        op.Pick(self.list[2], start_loc_box)
+        op.Pick(self.list[1], start_loc_box)
         #op.Place(self.list[1],self.kinbody_env.target_tray)
         #time.sleep(10000)
 
