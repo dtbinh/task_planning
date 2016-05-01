@@ -19,6 +19,19 @@ class HerbEnv(object):
     def perception_init(self):
 
         self.robot.DetectObjects()
+
+        good =False
+        while not good:
+            for b in self.env.GetBodies():
+                if b != self.robot:
+                    self.env.Remove(b)
+
+            self.robot.DetectObjects()
+
+            check= raw_input('Press "enter" to continue, "r" to redetect')
+            if check != 'r':
+                good= True
+
         glasses = [b for b in self.env.GetBodies() if 'glass' in b.GetName()]
         self.table = [b for b in self.env.GetBodies() if 'table' in b.GetName()][0]
         self.target_tray = [b for b in self.env.GetBodies() if 'tray' in b.GetName()][0]
