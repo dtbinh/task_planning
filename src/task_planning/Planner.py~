@@ -30,12 +30,11 @@ class Planner(object):
 	start_loc_box = self.kinbody_env.bounding_box(self.kinbody_env.table)
         start_loc_box[4] = (start_loc_box[1]+start_loc_box[4])/2
         print "start bounding_box", start_loc_box
-	list_picked = []
+	
 	c=0        
-	while c<len(self.list):	
+	while self.list:	
 		for i in range(len(self.list)):
 			print i
-
                 	if op.Pick(self.list[i], start_loc_box) == True:
                     		op.Place(self.list[i],self.kinbody_env.target_tray)
 			c+=1

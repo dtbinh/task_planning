@@ -7,7 +7,7 @@ import openravepy
 import time
 
 def main():
-	sim = False	
+	sim = True	
 	env, robot = herbpy.initialize(sim=sim,segway_sim=True)
 	#robot.right_arm.SetActive()
 	robot.head.SetStiffness(1)

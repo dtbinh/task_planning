@@ -19,10 +19,25 @@ class HerbEnv(object):
     def perception_init(self):
 
         self.robot.DetectObjects()
+
+        good =False
+        while not good:
+            for b in self.env.GetBodies():
+                if b != self.robot:
+                    self.env.Remove(b)
+
+            self.robot.DetectObjects()
+
+            check= raw_input('Press "enter" to continue, "r" to redetect')
+            if check != 'r':
+                good= True
+
         glasses = [b for b in self.env.GetBodies() if 'glass' in b.GetName()]
         self.table = [b for b in self.env.GetBodies() if 'table' in b.GetName()][0]
         self.target_tray = [b for b in self.env.GetBodies() if 'tray' in b.GetName()][0]
-
+        table_pos=self.table.GetTransform()
+	table_pos[2,3]+=0.04
+	self.table.SetTransform(table_pos)
         for g in glasses:
             self.place_on(g, self.table)
         self.place_on(self.target_tray, self.table)
@@ -47,8 +62,8 @@ class HerbEnv(object):
         self.target_kinbody1 = self.env.ReadKinBodyURI('models/data/objects/plastic_glass.kinbody.xml')
         self.target_kinbody1.SetName("glass1")
         self.env.Add(self.target_kinbody1)
-        glass_pose = np.array([[ 0, 0, 0, 1.0], 
-                              [-1, 0,  1, -0.5], 
+        glass_pose = np.array([[ 0, 0, 0, 0.6], 
+                              [-1, 0,  1, -0.2], 
                               [ 0, 1,  0, 0.7165], 
                               [ 0, 0,  0, 1]])
         self.target_kinbody1.SetTransform(glass_pose)
@@ -58,7 +73,7 @@ class HerbEnv(object):
         self.target_kinbody2 = self.env.ReadKinBodyURI('models/data/objects/plastic_glass.kinbody.xml')
         self.target_kinbody2.SetName("glass2")
         self.env.Add(self.target_kinbody2)
-        glass_pose = np.array([[ 0, 0, 0, 0.8], 
+        glass_pose = np.array([[ 0, 0, 0, 0.6], 
                                   [-1, 0,  1, -0.4], 
                                   [ 0, 1,  0, 0.7165], 
                                   [ 0, 0,  0, 1]])
@@ -70,7 +85,7 @@ class HerbEnv(object):
         self.target_kinbody3.SetName("glass3")
         self.env.Add(self.target_kinbody3)
         glass_pose = np.array([[ 0, 0, 0, 1.0], 
-                                  [-1, 0,  1, -0.3], 
+                                  [-1, 0,  1, -0.5], 
                                   [ 0, 1,  0, 0.7165], 
                                   [ 0, 0,  0, 1]])
         self.target_kinbody3.SetTransform(glass_pose)

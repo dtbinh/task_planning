@@ -62,9 +62,9 @@ class HerbEnv(object):
         self.target_kinbody1 = self.env.ReadKinBodyURI('models/data/objects/plastic_glass.kinbody.xml')
         self.target_kinbody1.SetName("glass1")
         self.env.Add(self.target_kinbody1)
-        glass_pose = np.array([[ 0, 0, 0, 1.0], 
-                              [-1, 0,  1, -0.5], 
-                              [ 0, 1,  0, 0.7165], 
+        glass_pose = np.array([[ 0, 0, 0, 0.9],
+                              [-1, 0,  1, -0.5],
+                              [ 0, 1,  0, 0.7165],
                               [ 0, 0,  0, 1]])
         self.target_kinbody1.SetTransform(glass_pose)
         self.place_on(self.target_kinbody1, self.table)
@@ -73,9 +73,9 @@ class HerbEnv(object):
         self.target_kinbody2 = self.env.ReadKinBodyURI('models/data/objects/plastic_glass.kinbody.xml')
         self.target_kinbody2.SetName("glass2")
         self.env.Add(self.target_kinbody2)
-        glass_pose = np.array([[ 0, 0, 0, 0.8], 
+        glass_pose = np.array([[ 0, 0, 0, 0.6], 
                                   [-1, 0,  1, -0.4], 
-                                  [ 0, 1,  0, 0.7165], 
+                                  [ 0, 1,  0, 0.7165],
                                   [ 0, 0,  0, 1]])
         self.target_kinbody2.SetTransform(glass_pose)
         self.place_on(self.target_kinbody2, self.table)
@@ -84,9 +84,9 @@ class HerbEnv(object):
         self.target_kinbody3 = self.env.ReadKinBodyURI('models/data/objects/plastic_glass.kinbody.xml')
         self.target_kinbody3.SetName("glass3")
         self.env.Add(self.target_kinbody3)
-        glass_pose = np.array([[ 0, 0, 0, 1.0], 
-                                  [-1, 0,  1, -0.3], 
-                                  [ 0, 1,  0, 0.7165], 
+        glass_pose = np.array([[ 0, 0, 0, 0.8], 
+                                  [-1, 0,  1, -0.5], 
+                                  [ 0, 1,  0, 0.7165],
                                   [ 0, 0,  0, 1]])
         self.target_kinbody3.SetTransform(glass_pose)
         self.place_on(self.target_kinbody3, self.table)
@@ -96,10 +96,10 @@ class HerbEnv(object):
         self.env.Add(self.target_tray)
         tray_pose = np.array([[ 0, 1, 0, 0.9], 
                                   [1, 0,  0, 0.5], 
-                                  [ 0, 0,  1, 0.7165], 
+                                  [ 0, 0,  1, 0.7165],
                                   [ 0, 0,  0, 1]])
         self.target_tray.SetTransform(tray_pose)
-        self.place_on(self.target_tray, self.table)
+        #self.place_on(self.target_tray, self.table)
 
         #creating object list
         self.obj_list=[self.target_kinbody1, self.target_kinbody2, self.target_kinbody3]
@@ -115,5 +115,5 @@ class HerbEnv(object):
     def place_on(self, obj, on_obj):
         pos = obj.GetTransform()
         while obj.GetEnv().CheckCollision(obj, on_obj):
-            pos[2,3] += 0.01
+            pos[2,3] += 0.002
             obj.SetTransform(pos)
