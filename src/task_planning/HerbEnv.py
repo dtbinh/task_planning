@@ -17,6 +17,7 @@ class HerbEnv(object):
             self.perception_init()
 	       
     def perception_init(self):
+        self.robot.right_arm.PlanToNamedConfiguration('home',execute=True)
 
         self.robot.DetectObjects()
 
@@ -40,7 +41,9 @@ class HerbEnv(object):
 	self.table.SetTransform(table_pos)
         for g in glasses:
             self.place_on(g, self.table)
+            self.place_after(g)
         self.place_on(self.target_tray, self.table)
+
 
         self.obj_list=glasses
         
@@ -48,7 +51,7 @@ class HerbEnv(object):
 
         # add a table
         self.table = self.env.ReadKinBodyXMLFile('models/data/furniture/table.kinbody.xml')
-        #self.table = self.env.ReadKinBodyXMLFile('furniture/table.kinbody.xml')
+        #self.table = self.env.ReadKinBodyXMLFile('furniture/table.kinbody.xml') fuze_bottle.kinbody.xml/
         self.env.Add(self.table)
         self.table.SetName("table")
         table_pose = np.array([[ 0, 0, -1, 0.9], 
@@ -63,7 +66,7 @@ class HerbEnv(object):
         self.target_kinbody1.SetName("glass1")
         self.env.Add(self.target_kinbody1)
         glass_pose = np.array([[ 0, 0, 0, 0.9],
-                              [-1, 0,  1, -0.5],
+                              [-1, 0,  1, -0.2],
                               [ 0, 1,  0, 0.7165],
                               [ 0, 0,  0, 1]])
         self.target_kinbody1.SetTransform(glass_pose)
@@ -115,5 +118,11 @@ class HerbEnv(object):
     def place_on(self, obj, on_obj):
         pos = obj.GetTransform()
         while obj.GetEnv().CheckCollision(obj, on_obj):
-            pos[2,3] += 0.002
+            pos[2,3] += 0.02
             obj.SetTransform(pos)
+    
+    def place_after(self, obj):
+        pos = obj.GetTransform()
+        pos[0,3] += 0.01
+	pos[1,3]+= 0.01
+        obj.SetTransform(pos)

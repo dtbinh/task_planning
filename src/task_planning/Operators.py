@@ -17,9 +17,10 @@ class Operators(object):
 
     def Pick(self,object_id,object_loc):
         
-        if (self.fluents.Holding()==None) and (self.fluents.In(object_id,object_loc)==True) and (self.fluents.IsReachable(object_id)==True) and (self.fluents.ClearX([object_id])==True):
+        if (self.fluents.Holding()==None) and (self.fluents.In(object_id,object_loc)==True) and (self.fluents.ClearX([object_id])==True):#and (self.fluents.IsReachable(object_id)==True)
 
-            self.robot.Grasp(object_id,manip = self.robot.right_arm)
+            self.robot.PushGrasp(object_id,manip = self.robot.right_arm)
+	    self.robot.Lift(object_id, manip = self.robot.right_arm)
             print str(object_id) + " has been picked"
             return True
         else:
