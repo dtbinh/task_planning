@@ -17,7 +17,9 @@ def main():
 	env.GetViewer().SetName('HPN Viewer')
 	env.Add(robot)
 	kinbody_env = HerbEnv(env,robot,sim)
-
+	
+	import IPython
+	IPython.embed()
 	plan = Planner(env,robot,kinbody_env)
 	plan.Plan(kinbody_env.obj_list)
 #	time.sleep(10000)

@@ -51,7 +51,6 @@ class HerbEnv(object):
 
         # add a table
         self.table = self.env.ReadKinBodyXMLFile('models/data/furniture/table.kinbody.xml')
-        #self.table = self.env.ReadKinBodyXMLFile('furniture/table.kinbody.xml') fuze_bottle.kinbody.xml/
         self.env.Add(self.table)
         self.table.SetName("table")
         table_pose = np.array([[ 0, 0, -1, 0.9], 
@@ -60,13 +59,13 @@ class HerbEnv(object):
                                   [ 0, 0,  0, 1]])
         self.table.SetTransform(table_pose)
 
-        #add kinbodies
+       #add kinbodies
         #glass 1
         self.target_kinbody1 = self.env.ReadKinBodyURI('models/data/objects/plastic_glass.kinbody.xml')
         self.target_kinbody1.SetName("glass1")
         self.env.Add(self.target_kinbody1)
-        glass_pose = np.array([[ 0, 0, 0, 0.9],
-                              [-1, 0,  1, -0.2],
+        glass_pose = np.array([[ 0, 0, 0, 1],
+                              [-1, 0,  1, -0.3],
                               [ 0, 1,  0, 0.7165],
                               [ 0, 0,  0, 1]])
         self.target_kinbody1.SetTransform(glass_pose)
@@ -76,8 +75,8 @@ class HerbEnv(object):
         self.target_kinbody2 = self.env.ReadKinBodyURI('models/data/objects/plastic_glass.kinbody.xml')
         self.target_kinbody2.SetName("glass2")
         self.env.Add(self.target_kinbody2)
-        glass_pose = np.array([[ 0, 0, 0, 0.6], 
-                                  [-1, 0,  1, -0.4], 
+        glass_pose = np.array([[ 0, 0, 0, 0.7], 
+                                  [-1, 0,  1, -0.1], 
                                   [ 0, 1,  0, 0.7165],
                                   [ 0, 0,  0, 1]])
         self.target_kinbody2.SetTransform(glass_pose)
@@ -87,7 +86,7 @@ class HerbEnv(object):
         self.target_kinbody3 = self.env.ReadKinBodyURI('models/data/objects/plastic_glass.kinbody.xml')
         self.target_kinbody3.SetName("glass3")
         self.env.Add(self.target_kinbody3)
-        glass_pose = np.array([[ 0, 0, 0, 0.8], 
+        glass_pose = np.array([[ 0, 0, 0, 0.7], 
                                   [-1, 0,  1, -0.5], 
                                   [ 0, 1,  0, 0.7165],
                                   [ 0, 0,  0, 1]])

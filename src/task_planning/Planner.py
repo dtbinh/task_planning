@@ -26,7 +26,6 @@ class Planner(object):
         op.Place(self.list[1],self.kinbody_env.target_tray)
         time.sleep(10000)
 	'''
-
 	
         #self.robot.right_arm.PlanToNamedConfiguration('home',execute=True)
         op = Operators(self.planning_env, self.robot,self.kinbody_env)
@@ -40,8 +39,7 @@ class Planner(object):
                 if op.Pick(element, start_loc_box) == True:
                     op.Place(element,self.kinbody_env.target_tray)
                     self.list.remove(element)
-            #if (time.time()-start)>200:
-				
+            #if (time.time()-start)>200:		
 		#break
 	
 	#self.robot.right_arm.PlanToNamedConfiguration('home',execute=True)

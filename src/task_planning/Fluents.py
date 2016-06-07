@@ -79,7 +79,7 @@ class Fluents(object):
             for obj in self.kinbody_env.obj_list:
                 if obj not in obj_list:
                     non_obj.append(obj)
-                    if self.min_dist(obj)==False: #can be changed with min_dist()
+                    if self.final_metric(obj)==False: #can be changed with min_dist()
                         check_non+=1
             if check_non==len(non_obj):
                 check_req+=1
